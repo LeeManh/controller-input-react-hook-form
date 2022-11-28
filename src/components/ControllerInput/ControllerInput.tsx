@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { InputHTMLAttributes } from "react";
-import { useController, UseControllerProps } from "react-hook-form";
+import {
+  FieldPath,
+  FieldValues,
+  useController,
+  UseControllerProps,
+} from "react-hook-form";
 
-import { Schema } from "../../utils/rules";
-
-type IFormInputs = Pick<Schema, "email" | "password" | "phone">;
-
-type ControllerInputProps = UseControllerProps<IFormInputs> &
-  InputHTMLAttributes<HTMLInputElement> & {
-    isNunberOnly?: boolean;
-  };
-
-function ControllerInput(props: ControllerInputProps) {
+function ControllerInput<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>(
+  props: UseControllerProps<TFieldValues, TName> &
+    InputHTMLAttributes<HTMLInputElement> & { isNunberOnly?: boolean }
+) {
   const { type = "text", isNunberOnly = false, ...rest } = props;
-
   const { field, fieldState } = useController(props);
 
   const [value, setValue] = useState(String(field.value)); //state UI
@@ -29,7 +30,13 @@ function ControllerInput(props: ControllerInputProps) {
 
   return (
     <div>
-      <input {...field} {...rest} value={value} onChange={handleOnChange} />
+      <input
+        {...field}
+        {...rest}
+        value={value}
+        onChange={handleOnChange}
+        type={type}
+      />
       <p>{fieldState.error && fieldState.error.message}</p>
     </div>
   );

@@ -1,13 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-
+import { FieldValues } from "react-hook-form";
 import "./App.css";
 
 import { Schema, schema } from "./utils/rules";
 import ControllerInput from "./components/ControllerInput/ControllerInput";
 import { useRef } from "react";
 
-type IFormInputs = Pick<Schema, "email" | "password" | "phone">;
+type IFormInputs = Pick<Schema, "email" | "password" | "phone"> & FieldValues;
 
 const App = () => {
   const { control, handleSubmit } = useForm<IFormInputs>({
