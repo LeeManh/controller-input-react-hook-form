@@ -66,3 +66,18 @@ export default InputV2
 // function App() {
 //   return <Hexa person={{ getName: handleName }} lastName='Duoc' />
 // }
+
+
+// --- usage
+  {/* <InputV2
+              control={control}
+              name='price_min'
+              type='number'
+              className='grow'
+              placeholder='₫ TỪ'
+              classNameInput='p-1 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
+              classNameError='hidden'
+              onChange={() => {
+                trigger('price_max')
+              }}
+            /> */}
